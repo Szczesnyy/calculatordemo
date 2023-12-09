@@ -1,36 +1,39 @@
 <h2>Calculator</h2>
-<div class="main">
+<div class="container">
+
   <div class="screen">
-    <textarea class="non-resizable">
-        {{funcT}} 
-        {{calValue | number}}</textarea>
+    <div class="previousVal">{{previousNumber}} </div>
+    <div class="currentVal">{{currentNumber}}</div>
   </div>
-  <div class="buttons">
-    <div class="sec1">
-      <button (click)="onClickValue('1','number')" mat-raised-button>1</button>
-      <button (click)="onClickValue('2','number')" mat-raised-button>2</button>
-      <button (click)="onClickValue('3','number')" mat-raised-button>3</button>
+
+  <div class="main">
+    <div class="buttons">
+      <div class="sec1">
+        <button (click)="onNumberClick('1')" mat-raised-button>1</button>
+        <button (click)="onNumberClick('2')" mat-raised-button>2</button>
+        <button (click)="onNumberClick('3')" mat-raised-button>3</button>
+      </div>
+      <div class="sec2">
+        <button (click)="onNumberClick('4')" mat-raised-button>4</button>
+        <button (click)="onNumberClick('5')" mat-raised-button>5</button>
+        <button (click)="onNumberClick('6')" mat-raised-button>6</button>
+      </div>
+      <div class="sec3">
+        <button (click)="onNumberClick('7')" mat-raised-button>7</button>
+        <button (click)="onNumberClick('8')" mat-raised-button>8</button>
+        <button (click)="onNumberClick('9')" mat-raised-button>9</button>
+      </div>
+      <div class="sec5">
+        <button (click)="onNumberClick('0')" mat-raised-button>0</button>
+        <button (click)="onClear()" mat-raised-button>C</button>
+        <button (click)="onEqual()" mat-raised-button>=</button>
+      </div>
     </div>
-    <div class="sec2">
-      <button (click)="onClickValue('4','number')" mat-raised-button>4</button>
-      <button (click)="onClickValue('5','number')" mat-raised-button>5</button>
-      <button (click)="onClickValue('6','number')" mat-raised-button>6</button>
+    <div class="sec4">
+      <button (click)="onFunctionClick('+')" mat-raised-button>+</button>
+      <button (click)="onFunctionClick('-')" mat-raised-button>-</button>
+      <button (click)="onFunctionClick('*')" mat-raised-button>*</button>
+      <button (click)="onFunctionClick('/')" mat-raised-button>/</button>
     </div>
-    <div class="sec3">
-      <button (click)="onClickValue('7','number')" mat-raised-button>7</button>
-      <button (click)="onClickValue('8','number')" mat-raised-button>8</button>
-      <button (click)="onClickValue('9','number')" mat-raised-button>9</button>
-    </div>
-    <div class="sec5">
-      <button (click)="onClickValue('0','number')" mat-raised-button>0</button>
-      <button (click)="onClickValue('C','function')" mat-raised-button>C</button>
-      <button (click)="onClickValue('=','function')" mat-raised-button>=</button>
-    </div>
-  </div>
-  <div class="sec4">
-    <button (click)="onClickValue('+','function')" mat-raised-button>+</button>
-    <button (click)="onClickValue('-','function')" mat-raised-button>-</button>
-    <button (click)="onClickValue('*','function')" mat-raised-button>*</button>
-    <button (click)="onClickValue('/','function')" mat-raised-button>/</button>
   </div>
 </div>

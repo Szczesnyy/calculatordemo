@@ -1,34 +1,54 @@
-.main{
-    display: flex;
-    justify-content: center;
+.container {
+	width: 300px;
 }
 
-.buttons{
+.main {
+	width: 300px;
 	display: flex;
-    justify-content: center;
+	justify-content: center;
+	margin-top: 3px;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 	align-content: center;
 }
 
-.sec4{
+.sec4 {
 	float: right;
 	flex-direction: column;
 	display: flex;
 }
 
-button{
+button {
 	width: 75px;
 	height: 75px;
 	font-size: large;
 }
 
-.screen{
+.screen {
+	
 	display: flex;
+	border: 1px solid gainsboro;
+	border-radius: var(--mdc-protected-button-container-shape);
+	--mdc-protected-button-container-shape: 4px;
+	justify-content: right;
+	padding-right: 8px;
+	flex-direction: column;
+	align-items: flex-end;
 }
 
-.non-resizable {
-	resize: none; 
-	width: 300px; 
-	height: 100%;
-  }
+.previousVal {
+	font-family: Arial;
+	font-size: x-small;
+	color: gainsboro;
+	height: 15px;
+}
+
+.currentVal{
+	font-family: Arial;
+	font-size: 18px;
+}
