@@ -47,6 +47,7 @@ export class AppComponent {
       this.valueCalculate(val);
     }
   }
+
   valueCalculate(val: string){
     if(this.funcT == '+'){
       let Total = this.firstNumber + this.secondNumber;
@@ -64,24 +65,32 @@ export class AppComponent {
       if(val == '='){this.onEqualPress()}
     }
     if(this.funcT == '/'){
-      let Total = this.firstNumber / this.secondNumber;
-      this.totalAssignValues(Total, val);
-      if(val == '='){this.onEqualPress()}
+      if (this.secondNumber === 0) {
+        this.calValue = 0; // Ustawienie wyniku na zero, gdy próbujemy dzielić przez zero
+        this.firstNumber = 0;
+        this.secondNumber = 0;
+        this.calNumber = 'noValue';
+        this.funcT = val;
+      } else {
+        let Total = this.firstNumber / this.secondNumber;
+        this.totalAssignValues(Total, val);
+        if(val == '='){this.onEqualPress()}
+      }
     }
-  }
-    totalAssignValues(Total: number, val: string){
-      this.calValue = Total;
-      this.firstNumber = 0;
-      this.secondNumber = 0;
-      this.calNumber = 'noValue';
-      this.funcT = val;
   }
 
-    onEqualPress(){
-      this.firstNumber = 0;
-      this.secondNumber = 0;
-      this.funcT = 'NoFunction';
-      this.calNumber = 'noValue';
-    }
+  totalAssignValues(Total: number, val: string){
+    this.calValue = Total;
+    this.firstNumber = 0;
+    this.secondNumber = 0;
+    this.calNumber = 'noValue';
+    this.funcT = val;
+  }
+
+  onEqualPress(){
+    this.firstNumber = 0;
+    this.secondNumber = 0;
+    this.funcT = 'NoFunction';
+    this.calNumber = 'noValue';
+  }
 }
-
