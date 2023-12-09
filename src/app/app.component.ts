@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'calculator';
@@ -13,7 +13,7 @@ export class AppComponent {
   isAfterEqual: boolean = false;
 
   constructor() {
-    this.currentNumber = "0"
+    this.currentNumber = '0';
   }
 
   onClear() {
@@ -31,10 +31,9 @@ export class AppComponent {
     if (this.currentNumber.length > 9) {
       return;
     }
-    if (this.currentNumber === "0") {
+    if (this.currentNumber === '0') {
       this.currentNumber = val;
-    }
-    else {
+    } else {
       this.currentNumber = this.currentNumber + val;
     }
   }
@@ -42,18 +41,19 @@ export class AppComponent {
   onEqual() {
     if (this.previousNumber !== '') {
       this.isAfterEqual = true;
-      let wynik: number = 0;
+      let wynik: any = 0;
       if (this.funcT === '+') {
         wynik = Number(this.previousNumber) + Number(this.currentNumber);
-      }
-      else if (this.funcT === '-') {
+      } else if (this.funcT === '-') {
         wynik = Number(this.previousNumber) - Number(this.currentNumber);
-      }
-      else if (this.funcT === '*') {
+      } else if (this.funcT === '*') {
         wynik = Number(this.previousNumber) * Number(this.currentNumber);
-      }
-      else if (this.funcT === '/') {
-        wynik = Number(this.previousNumber) / Number(this.currentNumber);
+      } else if (this.funcT === '/') {
+        if (this.currentNumber === '0') {
+          wynik = 'Error';
+        } else {
+          wynik = Number(this.previousNumber) / Number(this.currentNumber);
+        }
       }
       this.funcT = '';
       this.previousNumber = '';
@@ -82,7 +82,9 @@ export class AppComponent {
       this.onEqual();
       this.funcT = '/';
     }
-
+    if (this.currentNumber === 'Error') {
+      return;
+    }
     this.previousNumber = this.currentNumber;
     this.currentNumber = '0';
   }
