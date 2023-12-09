@@ -7,81 +7,83 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'calculator';
-  
-  calValue: number = 0;
-  funcT: any = 'NoFunction';
+  funcT: string = '';
+  previousNumber: string = '';
+  currentNumber: string = '';
+  isAfterEqual: boolean = false;
 
-  calNumber: string = 'noValue';
+  constructor() {
+    this.currentNumber = "0"
+  }
 
-  firstNumber: number = 0;
-  secondNumber: number = 0;
+  onClear() {
+    this.funcT = '';
+    this.previousNumber = '';
+    this.currentNumber = '0';
+  }
 
-  onClickValue(val: string, type: any){
-    if(type == 'number'){
-      this.onNumberClick(val);
+  onNumberClick(val: string) {
+    if (this.isAfterEqual) {
+      this.currentNumber = '0';
+      this.isAfterEqual = false;
     }
-    else if(type == 'function'){
-      this.onFunctionClick(val);
+
+    if (this.currentNumber.length > 9) {
+      return;
+    }
+    if (this.currentNumber === "0") {
+      this.currentNumber = val;
+    }
+    else {
+      this.currentNumber = this.currentNumber + val;
     }
   }
 
-  onNumberClick(val: string){
-    if(this.calNumber != 'noValue'){
-      this.calNumber = this.calNumber + val;
+  onEqual() {
+    if (this.previousNumber !== '') {
+      this.isAfterEqual = true;
+      let wynik: number = 0;
+      if (this.funcT === '+') {
+        wynik = Number(this.previousNumber) + Number(this.currentNumber);
+      }
+      else if (this.funcT === '-') {
+        wynik = Number(this.previousNumber) - Number(this.currentNumber);
+      }
+      else if (this.funcT === '*') {
+        wynik = Number(this.previousNumber) * Number(this.currentNumber);
+      }
+      else if (this.funcT === '/') {
+        wynik = Number(this.previousNumber) / Number(this.currentNumber);
+      }
+      this.funcT = '';
+      this.previousNumber = '';
+      this.currentNumber = wynik.toString();
     }
-    else{
-      this.calNumber = val;
-    }
-    this.calValue = parseInt(this.calNumber);
   }
 
-  onFunctionClick(val: string){
-    if(this.funcT == 'NoFunction'){
-      this.firstNumber = this.calValue;
-      this.calValue = 0;
-      this.calNumber = 'noValue';
-      this.funcT = val;
+  onFunctionClick(val: string) {
+    if (val === '+') {
+      this.funcT = '+';
+      this.onEqual();
+      this.funcT = '+';
     }
-    else if (this.funcT != 'NoFunction'){
-      this.secondNumber = this.calValue;
-      this.valueCalculate(val);
+    if (val === '-') {
+      this.funcT = '-';
+      this.onEqual();
+      this.funcT = '-';
     }
-  }
-  valueCalculate(val: string){
-    if(this.funcT == '+'){
-      let Total = this.firstNumber + this.secondNumber;
-      this.totalAssignValues(Total, val);
-      if(val == '='){this.onEqualPress()}
+    if (val === '*') {
+      this.funcT = '*';
+      this.onEqual();
+      this.funcT = '*';
     }
-    if(this.funcT == '-'){
-      let Total = this.firstNumber - this.secondNumber;
-      this.totalAssignValues(Total, val);
-      if(val == '='){this.onEqualPress()}
+    if (val === '/') {
+      this.funcT = '/';
+      this.onEqual();
+      this.funcT = '/';
     }
-    if(this.funcT == '*'){
-      let Total = this.firstNumber * this.secondNumber;
-      this.totalAssignValues(Total, val);
-      if(val == '='){this.onEqualPress()}
-    }
-    if(this.funcT == '/'){
-      let Total = this.firstNumber / this.secondNumber;
-      this.totalAssignValues(Total, val);
-      if(val == '='){this.onEqualPress()}
-    }
-  }
-    totalAssignValues(Total: number, val: string){
-      this.calValue = Total;
-      this.firstNumber = 0;
-      this.secondNumber = 0;
-      this.calNumber = 'noValue';
-      this.funcT = val;
-  }
 
-    onEqualPress(){
-      this.firstNumber = 0;
-      this.secondNumber = 0;
-      this.funcT = 'NoFunction';
-      this.calNumber = 'noValue';
-    }
+    this.previousNumber = this.currentNumber;
+    this.currentNumber = '0';
+  }
 }
-
